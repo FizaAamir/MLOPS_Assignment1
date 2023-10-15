@@ -1,3 +1,7 @@
+"""
+Flask Application for Sentiment Analysis.
+"""
+
 from flask import Flask, render_template, request
 import tensorflow as tf
 from tensorflow.keras.models import load_model
@@ -16,8 +20,16 @@ tokenizer.word_index = imdb.get_word_index()
 # Load the trained model from the HDF5 file
 model = load_model('sentiment_model.h5')
 
-# Define a function to predict sentiment
 def predict_sentiment(text):
+    """
+    Predict sentiment for the given text.
+
+    Args:
+        text (str): The input text for sentiment prediction.
+
+    Returns:
+        str: The predicted sentiment (Positive/Negative).
+    """
     max_length = 250  # Same as the model's max_length
     text = text.lower()
     text = text.split()
@@ -28,6 +40,12 @@ def predict_sentiment(text):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    """
+    Handle requests to the root URL.
+
+    Returns:
+        str: Rendered HTML template with prediction.
+    """
     prediction = None
     if request.method == 'POST':
         user_input = request.form['user_input']
