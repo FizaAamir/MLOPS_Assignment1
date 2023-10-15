@@ -43,6 +43,7 @@ def index():
     """
     Handle requests to the root URL.
 
+
     Returns:
         str: Rendered HTML template with prediction.
     """
